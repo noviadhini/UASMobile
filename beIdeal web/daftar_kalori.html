@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Daftar Kalori</title>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyBwe8o8766ZrNL_OFSo2fmdgmaQrFui6gM",
+	    authDomain: "beideal-d0020.firebaseapp.com",
+	    databaseURL: "https://beideal-d0020.firebaseio.com",
+	    projectId: "beideal-d0020",
+	    storageBucket: "beideal-d0020.appspot.com",
+	    messagingSenderId: "502909276646"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>Id</td>
+			<td><input type="text" name="id" id="makanan_id"></td>
+		</tr>
+		<tr>
+			<td>Nama Makanan:</td>
+			<td><input type="text" name="nama" id="nama_id"></td>
+		</tr>
+		<tr>
+			<td>Jumlah Kalori:</td>
+			<td><input type="text" name="kalori" id="kalori_id"></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="Save" onclick="save_kalori();" />
+				<input type="button" value="Update" onclick="update_kalori();" />
+				<input type="button" value="Delete" onclick="delete_kalori();" />
+			</td>
+		</tr>
+	</table>
+
+	<h3>
+		Daftar Kalori
+	</h3>
+
+	<table id="tbl_user_list" border="1">
+		<tr>
+			<td>#ID</td>
+			<td>Nama Makanan</td>
+			<td>Jumlah Kalori</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		var tblUsers = document.getElementById('tbl_user_list');
+		var databaseRef = firebase.database().ref('makanan/');
+		var rowIndex = 1;
+
+		databaseRef.once('value', function(snapshot) {
+			snapshot.forEach(function(childSnapshot) {
+				var childKey = childSnapshot.key;
+				var childData = childSnapshot.val();
+
+				var row = tblUsers.insertRow(rowIndex);
+				var cellId = row.insertCell(0);
+				var cellName = row.insertCell(1);
+				var cellJumlah = row.insertCell(2);
+
+				cellId.appendChild(document.createTextNode(childKey));
+				cellName.appendChild(document.createTextNode(childData.user_name));
+				cellJumlah.appendChild(document.createTextNode(childData.kalori_id));
+
+				rowIndex = rowIndex + 1;
+			});
+		});
+
+		function save_kalori()
+		{
+			var user_name = document.getElementById('nama_id').value;
+			var kalori_id = document.getElementById('kalori_id').value;
+
+			var uid = firebase.database().ref().child('makanan').push().key;
+
+			var data = 
+			{
+				user_id: uid,
+				user_name: user_name,
+				kalori_id: kalori_id
+			}
+
+			var updates = {};
+			updates['/makanan/' + uid] = data;
+			firebase.database().ref().update(updates);
+
+			alert('Data makanan berhasil ditambahkan!');
+			reload_page();
+		}
+
+		function update_kalori()
+		{
+			var user_name = document.getElementById('nama_id').value;
+			var kalori_id = document.getElementById('kalori_id').value;
+			var user_id = document.getElementById('makanan_id').value;
+			alert(user_id);
+
+			var data = 
+			{
+				user_id: user_id,
+				user_name: user_name,
+				kalori_id: kalori_id
+			}
+
+			var updates = {};
+			updates['/makanan/' + user_id] = data;
+			firebase.database().ref().update(updates);
+
+			alert('Data makanan berhasil diubah!');
+			reload_page();
+		}
+
+		function delete_kalori()
+		{
+			var user_id = document.getElementById('makanan_id').value;
+
+			firebase.database().ref().child('/makanan/' + user_id).remove();
+			alert('Data makanan berhasil dihapus!');
+
+			reload_page();
+		}
+
+		function reload_page()
+		{
+			window.location.reload();
+		}
+	</script>
+</body>
+</html>

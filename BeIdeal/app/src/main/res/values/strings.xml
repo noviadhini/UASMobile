@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BeIdeal</string>
+    <string-array name="goldar">
+        <item>A</item>
+        <item>B</item>
+        <item>O</item>
+        <item>AB</item>
+    </string-array>
+    <string name="title_activity_sport">Map</string>
+    <string name="title_activity_resto">Map</string>
+    <string name="title_activity_home2">Home</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

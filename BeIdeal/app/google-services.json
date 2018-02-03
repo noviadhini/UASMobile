@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "502909276646",
+    "firebase_url": "https://beideal-d0020.firebaseio.com",
+    "project_id": "beideal-d0020",
+    "storage_bucket": "beideal-d0020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502909276646:android:837c3c443e19012c",
+        "android_client_info": {
+          "package_name": "rezida.beideal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502909276646-s5umik5t0erp200j3e5c9j2duekrc7g0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rezida.beideal",
+            "certificate_hash": "77e7717c01428c9b8eb34657449a5a478f388855"
+          }
+        },
+        {
+          "client_id": "502909276646-ga2qpglj9abs1t56md5fhh3386rmag64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs_SHmgkPwvPxUGTWpsgok15bFx7fSsQA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502909276646-ga2qpglj9abs1t56md5fhh3386rmag64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

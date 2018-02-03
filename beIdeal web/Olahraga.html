@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Daftar Tips Olahraga</title>
+	<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyBwe8o8766ZrNL_OFSo2fmdgmaQrFui6gM",
+	    authDomain: "beideal-d0020.firebaseapp.com",
+	    databaseURL: "https://beideal-d0020.firebaseio.com",
+	    projectId: "beideal-d0020",
+	    storageBucket: "beideal-d0020.appspot.com",
+	    messagingSenderId: "502909276646"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>Id</td>
+			<td><input type="text" name="id" id="olahraga_id"></td>
+		</tr>
+		<tr>
+			<td>Nama Olahraga:</td>
+			<td><input type="text" name="nama" id="nama_id"></td>
+		</tr>
+		<tr>
+			<td>Lama Olahraga:</td>
+			<td><input type="text" name="Waktu" id="Waktu_id"></td>
+		</tr>
+		<tr>
+			<td>Dilakukan Sebanyak:</td>
+			<td><input type="text" name="banyak" id="jumlah_id"></td>
+		</tr>
+		<tr>
+			<td>Jumlah Kalori Dibakar:</td>
+			<td><input type="text" name="kalori" id="kalori_id"></td>
+		</tr>
+		<tr>
+			<td>Olahraga Untuk:</td>
+			<td>
+				<input type="text" name="jk" id="jk_id">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" value="Save" onclick="save_olahraga();" />
+				<input type="button" value="Update" onclick="update_olahraga();" />
+				<input type="button" value="Delete" onclick="delete_olahraga();" />
+			</td>
+		</tr>
+	</table>
+
+	<h3>
+		Daftar Tips Olahraga
+	</h3>
+
+	<table id="tbl_user_list" border="1">
+		<tr>
+			<td>#ID</td>
+			<td>Nama Olahraga</td>
+			<td>Lama Olahraga</td>
+			<td>Dilakukan Sebanyak</td>
+			<td>Jumlah Kalori Dibakar</td>
+			<td>Olahraga Untuk</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		var tblUsers = document.getElementById('tbl_user_list');
+		var databaseRef = firebase.database().ref('olahraga/');
+		var rowIndex = 1;
+
+		databaseRef.once('value', function(snapshot) {
+			snapshot.forEach(function(childSnapshot) {
+				var childKey = childSnapshot.key;
+				var childData = childSnapshot.val();
+
+				var row = tblUsers.insertRow(rowIndex);
+				var cellId = row.insertCell(0);
+				var cellName = row.insertCell(1);
+				var cellLama = row.insertCell(2);
+				var cellSebanyak = row.insertCell(3);
+				var cellJumlah = row.insertCell(4);
+				var cellUntuk = row.insertCell(5);
+
+				cellId.appendChild(document.createTextNode(childKey));
+				cellName.appendChild(document.createTextNode(childData.user_name));
+				cellLama.appendChild(document.createTextNode(childData.Waktu_id));
+				cellSebanyak.appendChild(document.createTextNode(childData.jumlah_id));
+				cellJumlah.appendChild(document.createTextNode(childData.kalori_id));
+				cellUntuk.appendChild(document.createTextNode(childData.jk_id));
+
+				rowIndex = rowIndex + 1;
+			});
+		});
+
+		function save_olahraga()
+		{
+			var user_name = document.getElementById('nama_id').value;
+			var Waktu_id = document.getElementById('Waktu_id').value;
+			var jumlah_id = document.getElementById('jumlah_id').value;
+			var kalori_id = document.getElementById('kalori_id').value;
+			var jk_id = document.getElementById('jk_id').value;
+
+			var uid = firebase.database().ref().child('olahraga').push().key;
+
+			var data = 
+			{
+				user_id: uid,
+				user_name: user_name,
+				Waktu_id: Waktu_id,
+				jumlah_id: jumlah_id,
+				kalori_id: kalori_id,
+				jk_id: jk_id
+			}
+
+			var updates = {};
+			updates['/olahraga/' + uid] = data;
+			firebase.database().ref().update(updates);
+
+			alert('Data olahraga berhasil ditambahkan!');
+			reload_page();
+		}
+
+		function update_olahraga()
+		{
+			var user_name = document.getElementById('nama_id').value;
+			var Waktu_id = document.getElementById('Waktu_id').value;
+			var jumlah_id = document.getElementById('jumlah_id').value;
+			var kalori_id = document.getElementById('kalori_id').value;
+			var jk_id = document.getElementById('jk_id').value;
+			var user_id = document.getElementById('olahraga_id').value;
+			alert(user_id);
+
+			var data = 
+			{
+				user_id: user_id,
+				user_name: user_name,
+				Waktu_id: Waktu_id,
+				jumlah_id: jumlah_id,
+				kalori_id: kalori_id,
+				jk_id: jk_id
+			}
+
+			var updates = {};
+			updates['/olahraga/' + user_id] = data;
+			firebase.database().ref().update(updates);
+
+			alert('Data olahraga berhasil diubah!');
+			reload_page();
+		}
+
+		function delete_olahraga()
+		{
+			var user_id = document.getElementById('olahraga_id').value;
+
+			firebase.database().ref().child('/olahraga/' + user_id).remove();
+			alert('Data olahraga berhasil dihapus!');
+
+			reload_page();
+		}
+
+		function reload_page()
+		{
+			window.location.reload();
+		}
+	</script>
+</body>
+</html>

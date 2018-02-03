@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/profil"
+            android:icon="@drawable/profil"
+            android:title="Profil" />
+        <item
+            android:id="@+id/progress"
+            android:icon="@drawable/progress"
+            android:title="Progress Diet" />
+        <item
+            android:id="@+id/memakan"
+            android:icon="@drawable/memakan"
+            android:title="Memakan" />
+
+        <item
+            android:id="@+id/memakandihindari"
+            android:icon="@drawable/makanan_dihindari"
+            android:title="Makanan Dihindari" />
+
+        <item
+            android:id="@+id/olahraga"
+            android:icon="@drawable/olahraga"
+            android:title="Melakukan Olahraga" />
+
+        <item
+            android:id="@+id/tips"
+            android:icon="@drawable/tips_ola"
+            android:title="Tips Olahraga" />
+    </group>
+
+    <item android:title="Maps">
+        <menu>
+            <item
+                android:id="@+id/SportTerdekat"
+                android:icon="@drawable/sport_center"
+                android:title="Sport Terdekat" />
+            <item
+                android:id="@+id/resto"
+                android:icon="@drawable/resto"
+                android:title="Restaurant Terdekat" />
+        </menu>
+    </item>
+
+    <item android:title="Testimoni">
+        <menu>
+            <item
+                android:id="@+id/testimoni"
+                android:icon="@drawable/testimoni"
+                android:title="Testimoni" />
+
+        </menu>
+    </item>
+
+</menu>
